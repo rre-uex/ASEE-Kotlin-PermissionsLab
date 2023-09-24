@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat
 class MainActivity : AppCompatActivity() {
     companion object {
         private val Tag = MainActivity::class.java.simpleName
-        private const val MyPermissionsRequestReadContacts = 101
     }
 
     private val requestPermissionLauncher =
@@ -54,19 +53,6 @@ class MainActivity : AppCompatActivity() {
             } else -> {
                 Log.i(Tag, "Permission is not granted: request")
                 requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
-            }
-        }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>, grantResults: IntArray) {
-        Log.i(Tag, "Permission result obtained")
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            MyPermissionsRequestReadContacts -> {
-                buttonReadContacts.isEnabled = (
-                        grantResults.isNotEmpty() &&
-                        grantResults[0] == PackageManager.PERMISSION_GRANTED)
             }
         }
     }
